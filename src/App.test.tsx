@@ -82,6 +82,27 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /Afrita boðskap/ })).toBeInTheDocument();
   });
 
+  it('ignores a clipboard result that arrives after the cookie was reset', async () => {
+    let resolveWrite: () => void = () => {};
+    const writeText = vi.fn(() => new Promise<void>((resolve) => (resolveWrite = resolve)));
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    Object.defineProperty(window, 'isSecureContext', { value: true, configurable: true });
+
+    render(<App />);
+    fireEvent.click(screen.getAllByRole('button', { name: 'Brjóttu jólakexið' })[1]);
+    advance(1500);
+    fireEvent.click(screen.getByRole('button', { name: /Afrita boðskap/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Fá annað kex/ }));
+    advance(600);
+    fireEvent.click(screen.getAllByRole('button', { name: 'Brjóttu jólakexið' })[1]);
+    advance(1500);
+
+    resolveWrite();
+    await flushPromises();
+    expect(screen.getByRole('button', { name: /Afrita boðskap/ })).toBeInTheDocument();
+    expect(screen.queryByText('Afritað!')).not.toBeInTheDocument();
+  });
+
   it('shows a helpful message when copying fails', async () => {
     const writeText = vi.fn().mockRejectedValue(new Error('denied'));
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });

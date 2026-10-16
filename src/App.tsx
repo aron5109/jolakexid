@@ -35,6 +35,8 @@ export default function App() {
   const [announcement, setAnnouncement] = useState('');
   const [copyAnnouncement, setCopyAnnouncement] = useState('');
   const copyTimer = useRef<number | undefined>(undefined);
+  // Bumped on every reset so a slow clipboard write can't report on the next cookie.
+  const copyGeneration = useRef(0);
 
   const cookieRef = useRef<HTMLButtonElement>(null);
   const anotherRef = useRef<HTMLButtonElement>(null);
@@ -57,6 +59,7 @@ export default function App() {
         if (next.fortune) setAnnouncement(`Jólaboðskapurinn þinn: ${next.fortune.text}`);
         break;
       case 'resetting':
+        copyGeneration.current += 1;
         window.clearTimeout(copyTimer.current);
         setCopyStatus('idle');
         setCopyAnnouncement('');
@@ -83,7 +86,9 @@ export default function App() {
 
   const handleCopy = useCallback(async () => {
     if (!state.fortune) return;
+    const generation = copyGeneration.current;
     const ok = await copyText(formatFortuneForCopy(state.fortune.text));
+    if (generation !== copyGeneration.current) return;
     window.clearTimeout(copyTimer.current);
     if (ok) {
       setCopyStatus('copied');
