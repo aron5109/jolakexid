@@ -49,7 +49,7 @@ const FORTUNE_TEXTS: Record<FortuneCategory, readonly string[]> = {
   vinnuspa: [
     'Á næstu dögum mun eitthvað óvænt gerast. Líklega verður það svar við tölvupósti frá því í ágúst.',
     'Stjörnurnar segja að næsti fundur hefði mátt vera tölvupóstur.',
-    'Jólin færa þér ný tækifæri — og að minnsta kosti eina beiðni merkta áríðandi.',
+    'Jólin færa þér ný tækifæri og að minnsta kosti eina beiðni merkta áríðandi.',
     'Bráðum mun einhver segja „þetta tekur bara fimm mínútur“. Taktu frá allan eftirmiðdaginn.',
     'Kaffivélin mun reynast þér trygg á aðventunni. Ekki taka henni sem sjálfsögðum hlut.',
     'Þú munt loksins skilja Excel-skjalið. Rétt áður en einhver breytir því.',
