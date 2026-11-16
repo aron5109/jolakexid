@@ -64,7 +64,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /Fá annað kex/ })).toHaveFocus();
   });
 
-  it('copies the fortune and confirms with Afritað!', async () => {
+  it('copies the fortune and confirms with Afritað', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
     Object.defineProperty(window, 'isSecureContext', { value: true, configurable: true });
@@ -76,7 +76,7 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: /Afrita boðskap/ }));
     await flushPromises();
     expect(writeText).toHaveBeenCalledWith(`„${revealedText()}“\n— Jólakexið`);
-    expect(screen.getByRole('button', { name: /Afritað!/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Afritað/ })).toBeInTheDocument();
 
     advance(2500);
     expect(screen.getByRole('button', { name: /Afrita boðskap/ })).toBeInTheDocument();
@@ -100,7 +100,7 @@ describe('App', () => {
     resolveWrite();
     await flushPromises();
     expect(screen.getByRole('button', { name: /Afrita boðskap/ })).toBeInTheDocument();
-    expect(screen.queryByText('Afritað!')).not.toBeInTheDocument();
+    expect(screen.queryByText('Afritað')).not.toBeInTheDocument();
   });
 
   it('shows a helpful message when copying fails', async () => {

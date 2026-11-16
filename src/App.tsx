@@ -4,7 +4,6 @@ import { ChristmasBackground } from './components/ChristmasBackground';
 import { FortuneReveal } from './components/FortuneReveal';
 import { Ornament } from './components/Ornament';
 import { SoundToggle } from './components/SoundToggle';
-import { CupIcon, GiftIcon, SnowflakeIcon, SparkleIcon, StarIcon } from './components/icons';
 import { FORTUNES } from './data/fortunes';
 import { useCookieMachine } from './hooks/useCookieMachine';
 import { useReducedMotion } from './hooks/useReducedMotion';
@@ -12,13 +11,6 @@ import { copyText, formatFortuneForCopy } from './lib/clipboard';
 import { FULL_MOTION_DURATIONS, REDUCED_MOTION_DURATIONS, type CookieState } from './lib/cookieMachine';
 import { drawFortune } from './lib/fortunePicker';
 import { playCrack, playShimmer, unlockAudio } from './lib/sound';
-
-const CATEGORIES = [
-  { label: 'Jólaspeki', Icon: StarIcon },
-  { label: 'Vinnuspá', Icon: CupIcon },
-  { label: 'Jólaheppni', Icon: GiftIcon },
-  { label: 'Nýársspá', Icon: SparkleIcon },
-] as const;
 
 const COPIED_RESET_MS = 2200;
 
@@ -92,7 +84,7 @@ export default function App() {
     window.clearTimeout(copyTimer.current);
     if (ok) {
       setCopyStatus('copied');
-      setCopyAnnouncement('Afritað!');
+      setCopyAnnouncement('Afritað');
       copyTimer.current = window.setTimeout(() => {
         setCopyStatus('idle');
         setCopyAnnouncement('');
@@ -140,24 +132,6 @@ export default function App() {
           onCopy={handleCopy}
           anotherRef={anotherRef}
         />
-
-        <ul className="categories" aria-label="Tegundir spádóma">
-          {CATEGORIES.map(({ label, Icon }) => (
-            <li key={label}>
-              <Icon className="categories__icon" />
-              <span>{label}</span>
-            </li>
-          ))}
-        </ul>
-
-        <footer className="footer">
-          <p>Lítið kex. Stór jólagleði.</p>
-          <div className="footer__mark" aria-hidden="true">
-            <span />
-            <SnowflakeIcon />
-            <span />
-          </div>
-        </footer>
 
         <div className="visually-hidden" role="status" aria-live="polite" aria-atomic="true">
           {announcement}

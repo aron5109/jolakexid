@@ -1,6 +1,6 @@
 import type { Ref } from 'react';
 import type { CookiePhase } from '../lib/cookieMachine';
-import { CheckIcon, ChevronIcon, CopyIcon, RefreshIcon } from './icons';
+import { CheckIcon, CopyIcon, RefreshIcon } from './icons';
 
 export type CopyStatus = 'idle' | 'copied' | 'failed';
 
@@ -20,8 +20,7 @@ export function ActionButtons({ phase, copyStatus, onBreak, onAnother, onCopy, a
     return (
       <div className="actions" data-phase={phase}>
         <button type="button" className="btn btn--gold btn--cta" onClick={onBreak} disabled={phase !== 'idle'}>
-          <span>Brjóttu jólakexið</span>
-          <ChevronIcon className="btn__icon" />
+          Brjóttu jólakexið
         </button>
       </div>
     );
@@ -49,11 +48,11 @@ export function ActionButtons({ phase, copyStatus, onBreak, onAnother, onCopy, a
         aria-describedby={copyStatus === 'failed' ? 'copy-error' : undefined}
       >
         {copyStatus === 'copied' ? <CheckIcon className="btn__icon" /> : <CopyIcon className="btn__icon" />}
-        <span>{copyStatus === 'copied' ? 'Afritað!' : 'Afrita boðskap'}</span>
+        <span>{copyStatus === 'copied' ? 'Afritað' : 'Afrita boðskap'}</span>
       </button>
       {copyStatus === 'failed' && (
         <p className="actions__error" id="copy-error" role="alert">
-          Ekki tókst að afrita sjálfkrafa. Textinn hefur verið valinn svo þú getur afritað hann handvirkt.
+          Ekki tókst að afrita. Textinn hefur verið valinn svo nú má afrita hann handvirkt.
         </p>
       )}
     </div>

@@ -100,7 +100,7 @@ With `prefers-reduced-motion: reduce`, phases shorten to 60/220/200 ms, floating
 - `lang="is"` and semantic HTML (`main`, `header`, `h1`/`h2`, `footer`, a list).
 - Everything works from the keyboard: the cookie and all controls are native `<button>`s with visible focus rings.
 - Focus moves to "Fá annað kex" when a fortune appears and back to the cookie when a new one arrives.
-- The fortune is announced through an `aria-live` region, as is "Afritað!".
+- The fortune is announced through an `aria-live` region, as is "Afritað".
 - The sound toggle uses `aria-pressed`, and sound never plays unless the visitor turns it on.
 - Touch targets are at least 44 px and text contrast meets WCAG AA.
 
@@ -114,7 +114,7 @@ src/
     FortuneCookie.tsx          The cookie button, glow, shadow and crumbs
     CookieHalf.tsx             One SVG half of the cookie
     cookieGeometry.ts          Cookie shape (mirrored for the right half)
-    FortuneReveal.tsx          The stage: cookie, sparks and paper
+    FortuneReveal.tsx          The stage: cookie and paper
     FortunePaper.tsx           The fortune slip
     ActionButtons.tsx          "Brjóttu jólakexið", "Fá annað kex", "Afrita boðskap"
     SoundToggle.tsx            Sound on/off
